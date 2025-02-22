@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Head Noise Counter</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        #welcome {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #counter {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        #message {
+            font-size: 24px;
+            color: #ff4444;
+            margin-bottom: 20px;
+            display: none;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="welcome">Welcome back to Headnoise!</div>
+    <div id="counter">0</div>
+    <div id="message">Grow Up!</div>
+    <button onclick="increment()">Feel Noisy</button>
+    <button onclick="reset()">Reset</button>
+    <script>
+        let count = localStorage.getItem('headNoiseCount') ? parseInt(localStorage.getItem('headNoiseCount')) : 0;
+        const counter = document.getElementById('counter');
+        const message = document.getElementById('message');
+        counter.textContent = count;
+
+        function increment() {
+            count++;
+            counter.textContent = count;
+            localStorage.setItem('headNoiseCount', count);
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 1000);
+        }
+
+        function reset() {
+            count = 0;
+            counter.textContent = count;
+            localStorage.setItem('headNoiseCount', count);
+            message.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
